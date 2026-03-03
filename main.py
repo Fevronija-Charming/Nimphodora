@@ -7,7 +7,7 @@ TOKEN_API_KEY=os.getenv("TOKEN_API_KEY")
 bot_id=os.getenv("bot_id")
 moi_id=os.getenv("moi_id")
 from faststream.rabbit import RabbitBroker
-broker=RabbitBroker(url=os.getenv("broker.url"))
+broker=RabbitBroker(url=os.getenv("CLOUDAMQP_URL"))
 @broker.subscriber("PLATOKY")
 async def get_platky_fromFASTAPI(data: str):
     await Bot.send_message(chat_id=os.getenv('MYUSERID'),text='ФЕВРОНИЯ СООБЩАЕТ')
