@@ -12,6 +12,10 @@ broker=RabbitBroker(url=os.getenv("CLOUDAMQP_URL"))
 async def get_platky_fromFASTAPI(data: str):
     await Bot.send_message(chat_id=os.getenv('MYUSERID'),text='ФЕВРОНИЯ СООБЩАЕТ')
     await Bot.send_message(chat_id=os.getenv('MYUSERID'),text=data)
+@broker.subscriber("UROKI")
+async def get_platky_fromFASTAPI(data: str):
+    await Bot.send_message(chat_id=os.getenv('MYUSERID'),text='СЕКЛЕТЕЯ СООБЩАЕТ')
+    await Bot.send_message(chat_id=os.getenv('MYUSERID'),text=data)
 from aiogram import Bot, Dispatcher, types, F, BaseMiddleware
 # этр образ бота в программе
 Bot = Bot(TOKEN_API_KEY)
