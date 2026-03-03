@@ -1,7 +1,9 @@
+aio-pika==9.6.1
 aiofiles==25.1.0
 aiogram==3.23.0
 aiohappyeyeballs==2.6.1
 aiohttp==3.13.2
+aiormq==6.9.3
 aiosignal==1.4.0
 annotated-types==0.7.0
 anyio==4.12.1
@@ -15,6 +17,7 @@ frozenlist==1.8.0
 idna==3.11
 magic-filter==1.0.12
 multidict==6.7.0
+pamqp==3.3.0
 propcache==0.4.1
 psycopg2-binary==2.9.11
 pydantic==2.12.5
