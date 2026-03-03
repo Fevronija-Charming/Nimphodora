@@ -6,6 +6,12 @@ import asyncio
 TOKEN_API_KEY=os.getenv("TOKEN_API_KEY")
 bot_id=os.getenv("bot_id")
 moi_id=os.getenv("moi_id")
+from faststream.rabbit import RabbitBroker
+broker=RabbitBroker(url=os.getenv("broker.url"))
+@broker.subscriber("PLATOKY")
+async def get_platky_fromFASTAPI(data: str):
+    await Bot.send_message(chat_id=os.getenv('MYUSERID'),text='ФЕВРОНИЯ СООБЩАЕТ')
+    await Bot.send_message(chat_id=os.getenv('MYUSERID'),text=data)
 from aiogram import Bot, Dispatcher, types, F, BaseMiddleware
 # этр образ бота в программе
 Bot = Bot(TOKEN_API_KEY)
@@ -291,7 +297,10 @@ async def proverka_zapisi(message: types.Message):
         id_zapisi=id_zapisi+1
         await message.answer(text="Запись успешно внесена")
 async def main():
-    await Bot.set_my_commands(commands=private, scope=types.BotCommandScopeAllPrivateChats())
-    await Bot.delete_webhook(drop_pending_updates=True)
-    await dp.start_polling(Bot)
-asyncio.run(main())
+    async with broker:
+        await broker.start()
+        await Bot.set_my_commands(commands=private, scope=types.BotCommandScopeAllPrivateChats())
+        await Bot.delete_webhook(drop_pending_updates=True)
+        await dp.start_polling(Bot)
+if __name__ == "__main__":
+    asyncio.run(main())
